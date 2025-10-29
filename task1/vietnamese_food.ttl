@@ -3,7 +3,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 
-### CLASSES (3+) ###
+### 4 классов ###
 :VietnameseDish rdf:type owl:Class ;
     rdfs:label "Vietnamese Dish" .
 
@@ -16,7 +16,7 @@
 :Ingredient rdf:type owl:Class ;
     rdfs:label "Ingredient" .
 
-### PROPERTIES (2+) ###
+### 3 типов отношений ###
 :hasIngredient rdf:type owl:ObjectProperty ;
     rdfs:label "has ingredient" .
 
@@ -26,7 +26,7 @@
 :hasOrigin rdf:type owl:ObjectProperty ;
     rdfs:label "has origin" .
 
-### INDIVIDUALS (5+) ###
+### 5 сущность  ###
 :Pho rdf:type :VietnameseDish ;
     rdfs:label "Pho" ;
     :hasIngredient :RiceNoodle, :Beef ;
@@ -51,3 +51,4 @@
 
 :StreetVendor rdf:type :Restaurant ;
     rdfs:label "Street Vendor" .
+
