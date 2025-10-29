@@ -1,0 +1,47 @@
+@prefix : <http://example.org/family_ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+### ОНТОЛОГИЯ ###
+:family_ontology rdf:type owl:Ontology ;
+    rdfs:label "Family Ontology" .
+
+### КЛАСС ###
+:Человек rdf:type owl:Class ;
+    rdfs:label "Person" .
+
+### СВОЙСТВА ###
+:ИмеетРодителя rdf:type owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:label "hasParent" ;
+    rdfs:domain :Человек ;
+    rdfs:range :Человек ;
+    owl:propertyDisjointWith :ИмеетРодителя .
+
+:ИмеетПредка rdf:type owl:ObjectProperty ;
+    rdfs:label "hasAncestor" ;
+    owl:propertyChainAxiom ( :ИмеетРодителя :ИмеетПредка ) .
+
+:ИмеетПотомка rdf:type owl:ObjectProperty ;
+    rdfs:label "hasDescendant" ;
+    owl:propertyChainAxiom ( :ИмеетПотомка :ИмеетРодителя ) .
+
+### СУЩНОСТИ ###
+:Человек1 rdf:type :Человек ;
+    rdfs:label "Person1" .
+
+:Человек2 rdf:type :Человек ;
+    rdfs:label "Person2" ;
+    :ИмеетРодителя :Человек1 .
+
+:Человек3 rdf:type :Человек ;
+    rdfs:label "Person3" ;
+    :ИмеетРодителя :Человек2 .
+
+:Человек4 rdf:type :Человек ;
+    rdfs:label "Person4" ;
+    :ИмеетРодителя :Человек3 .
+
+:Человек5 rdf:type :Человек ;
+    rdfs:label "Person5" ;
+    :ИмеетРодителя :Человек4 .
