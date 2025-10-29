@@ -1,0 +1,53 @@
+@prefix : <http://example.org/vietnamese_food#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+### CLASSES (3+) ###
+:VietnameseDish rdf:type owl:Class ;
+    rdfs:label "Vietnamese Dish" .
+
+:StreetFood rdf:type owl:Class ;
+    rdfs:label "Street Food" .
+
+:Restaurant rdf:type owl:Class ;
+    rdfs:label "Restaurant" .
+
+:Ingredient rdf:type owl:Class ;
+    rdfs:label "Ingredient" .
+
+### PROPERTIES (2+) ###
+:hasIngredient rdf:type owl:ObjectProperty ;
+    rdfs:label "has ingredient" .
+
+:servedAt rdf:type owl:ObjectProperty ;
+    rdfs:label "served at" .
+
+:hasOrigin rdf:type owl:ObjectProperty ;
+    rdfs:label "has origin" .
+
+### INDIVIDUALS (5+) ###
+:Pho rdf:type :VietnameseDish ;
+    rdfs:label "Pho" ;
+    :hasIngredient :RiceNoodle, :Beef ;
+    :hasOrigin :Hanoi .
+
+:BanhMi rdf:type :StreetFood ;
+    rdfs:label "Banh Mi" ;
+    :servedAt :StreetVendor .
+
+:BunCha rdf:type :VietnameseDish ;
+    rdfs:label "Bun Cha" ;
+    :hasOrigin :Hanoi .
+
+:RiceNoodle rdf:type :Ingredient ;
+    rdfs:label "Rice Noodle" .
+
+:Beef rdf:type :Ingredient ;
+    rdfs:label "Beef" .
+
+:Hanoi rdf:type owl:Thing ;
+    rdfs:label "Hanoi" .
+
+:StreetVendor rdf:type :Restaurant ;
+    rdfs:label "Street Vendor" .
