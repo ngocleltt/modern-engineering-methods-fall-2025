@@ -1,47 +1,99 @@
-@prefix : <http://example.org/family_ontology#> .
+@prefix : <http://www.semanticweb.org/ngocleltt/ontologies/2025/9/family-task2/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/ngocleltt/ontologies/2025/9/family-task2/> .
 
-### ОНТОЛОГИЯ ###
-:family_ontology rdf:type owl:Ontology ;
-    rdfs:label "Family Ontology" .
+<http://www.semanticweb.org/ngocleltt/ontologies/2025/9/family-task2> rdf:type owl:Ontology ;
+    rdfs:label "Family Ontology - Task 2 (ngocleltt)" .
 
-### КЛАСС ###
-:Человек rdf:type owl:Class ;
-    rdfs:label "Person" .
+#################################################################
+#    Object Properties
+#################################################################
 
-### СВОЙСТВА ###
-:ИмеетРодителя rdf:type owl:ObjectProperty , owl:FunctionalProperty ;
+###  hasAncestor / ИмеетПредка
+:ИмеетПредка rdf:type owl:ObjectProperty ,
+                      owl:TransitiveProperty ;
+    rdfs:label "hasAncestor" ;
+    rdfs:domain :Человек ;
+    rdfs:range :Человек .
+
+###  hasDescendant / ИмеетПотомка
+:ИмеетПотомка rdf:type owl:ObjectProperty ,
+              owl:TransitiveProperty ;
+    rdfs:label "hasDescendant" ;
+    owl:inverseOf :ИмеетПредка ;
+    rdfs:domain :Человек ;
+    rdfs:range :Человек .
+
+###  hasParent / ИмеетРодителя
+:ИмеетРодителя rdf:type owl:ObjectProperty ,
+               owl:FunctionalProperty ,
+               owl:IrreflexiveProperty ;
     rdfs:label "hasParent" ;
     rdfs:domain :Человек ;
     rdfs:range :Человек ;
-    owl:propertyDisjointWith :ИмеетРодителя .
+    rdfs:subPropertyOf :ИмеетПредка ;
+    owl:inverseOf :ЯвляетсяРодителемДля .
 
-:ИмеетПредка rdf:type owl:ObjectProperty ;
-    rdfs:label "hasAncestor" ;
-    owl:propertyChainAxiom ( :ИмеетРодителя :ИмеетПредка ) .
+###  isParentOf / ЯвляетсяРодителемДля
+:ЯвляетсяРодителемДля rdf:type owl:ObjectProperty ;
+    rdfs:label "isParentOf" ;
+    rdfs:domain :Человек ;
+    rdfs:range :Человек ;
+    owl:inverseOf :ИмеетРодителя .
 
-:ИмеетПотомка rdf:type owl:ObjectProperty ;
-    rdfs:label "hasDescendant" ;
-    owl:propertyChainAxiom ( :ИмеетПотомка :ИмеетРодителя ) .
 
-### СУЩНОСТИ ###
-:Человек1 rdf:type :Человек ;
-    rdfs:label "Person1" .
+#################################################################
+#    Classes
+#################################################################
 
-:Человек2 rdf:type :Человек ;
-    rdfs:label "Person2" ;
-    :ИмеетРодителя :Человек1 .
+###  Person / Человек
+:Человек rdf:type owl:Class ;
+    rdfs:label "Person" .
 
-:Человек3 rdf:type :Человек ;
-    rdfs:label "Person3" ;
-    :ИмеетРодителя :Человек2 .
 
-:Человек4 rdf:type :Человек ;
-    rdfs:label "Person4" ;
-    :ИмеетРодителя :Человек3 .
+#################################################################
+#    Individuals (Example)
+#################################################################
 
-:Человек5 rdf:type :Человек ;
-    rdfs:label "Person5" ;
-    :ИмеетРодителя :Человек4 .
+:GGParent rdf:type owl:NamedIndividual ,
+                   :Человек ;
+    rdfs:label "GGParent" .
+
+:GParent rdf:type owl:NamedIndividual ,
+                  :Человек ;
+         rdfs:label "GParent" ;
+         :ИмеетРодителя :GGParent .
+
+:GParent2 rdf:type owl:NamedIndividual ,
+                   :Человек ;
+          rdfs:label "GParent2" ;
+          :ИмеетРодителя :GGParent .
+
+:Parent rdf:type owl:NamedIndividual ,
+                 :Человек ;
+        rdfs:label "Parent" ;
+        :ИмеетРодителя :GParent .
+
+:Parent2 rdf:type owl:NamedIndividual ,
+                  :Человек ;
+         rdfs:label "Parent2" ;
+         :ИмеетРодителя :GParent2 .
+
+:Child rdf:type owl:NamedIndividual ,
+                :Человек ;
+       rdfs:label "Child" ;
+       :ИмеетРодителя :Parent .
+
+:Child2 rdf:type owl:NamedIndividual ,
+                 :Человек ;
+        rdfs:label "Child2" ;
+        :ИмеетРодителя :Parent2 .
+
+:Child3 rdf:type owl:NamedIndividual ,
+                 :Человек ;
+        rdfs:label "Child3" ;
+        :ИмеетРодителя :Parent2 .
