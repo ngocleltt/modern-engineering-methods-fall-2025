@@ -1,1 +1,84 @@
+@prefix : <http://kik.misis.ru/ontology/mpi/2024/Ле-Ньы-Нгок/task3/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://kik.misis.ru/ontology/mpi/2024/Ле-Ньы-Нгок/task3/> .
 
+<http://kik.misis.ru/ontology/mpi/2024/Ле-Ньы-Нгок/task3> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://kik.misis.ru/ontology/mpi/2024/Ле-Ньы-Нгок/task3/имеет_предпочтение
+:имеет_предпочтение rdf:type owl:ObjectProperty .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Ле-Ньы-Нгок/task3/имеет_ограничение
+:имеет_ограничение rdf:type owl:ObjectProperty .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Ле-Ньы-Нгок/task3/относится_к_категории
+:относится_к_категории rdf:type owl:ObjectProperty .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Ле-Ньы-Нгок/task3/выбирает
+:выбирает rdf:type owl:ObjectProperty .
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://kik.misis.ru/ontology/mpi/2024/Ле-Ньы-Нгок/task3/Клиент
+:Клиент rdf:type owl:Class .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Ле-Ньы-Нгок/task3/Блюдо
+:Блюдо rdf:type owl:Class .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Ле-Ньы-Нгок/task3/КатегорияБлюда
+:КатегорияБлюда rdf:type owl:Class .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Ле-Ньы-Нгок/task3/Предпочтение
+:Предпочтение rdf:type owl:Class .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Ле-Ньы-Нгок/task3/Ограничение
+:Ограничение rdf:type owl:Class .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Ле-Ньы-Нгок/task3/ПодходящееБлюдо
+:ПодходящееБлюдо rdf:type owl:Class .
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  Клиенты
+:Ле_Ньы_Нгок rdf:type owl:NamedIndividual , :Клиент ;
+    :имеет_предпочтение :Любит_острое ;
+    :имеет_ограничение :Без_глютена .
+
+:Анна_Иванова rdf:type owl:NamedIndividual , :Клиент ;
+    :имеет_предпочтение :Вегетарианское .
+
+###  Блюда
+:Паста_Карбонара rdf:type owl:NamedIndividual , :Блюдо ;
+    :относится_к_категории :Итальянская_кухня .
+
+:Тако_с_говядиной rdf:type owl:NamedIndividual , :Блюдо ;
+    :относится_к_категории :Мексиканская_кухня ;
+    :относится_к_категории :Острое .
+
+:Салат_Цезарь rdf:type owl:NamedIndividual , :Блюдо ;
+    :относится_к_категории :Вегетарианское .
+
+:Безглютеновый_пирог rdf:type owl:NamedIndividual , :Блюдо ;
+    :относится_к_категории :Без_глютена .
+
+###  Категории и ограничения
+:Острое rdf:type owl:NamedIndividual , :Предпочтение .
+:Вегетарианское rdf:type owl:NamedIndividual , :Предпочтение .
+:Без_глютена rdf:type owl:NamedIndividual , :Ограничение .
+:Итальянская_кухня rdf:type owl:NamedIndividual , :КатегорияБлюда .
+:Мексиканская_кухня rdf:type owl:NamedIndividual , :КатегорияБлюда .
+
+###  Запросы
+:запрос_Ле rdf:type owl:NamedIndividual ;
+    :выбирает :Тако_с_говядиной .
