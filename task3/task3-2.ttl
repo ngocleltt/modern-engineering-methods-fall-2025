@@ -1,0 +1,93 @@
+@prefix : <http://kik.misis.ru/ontology/mpi/2024/Ле-Ньы-Нгок/task3/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://kik.misis.ru/ontology/mpi/2024/Ле-Ньы-Нгок/task3/> .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+# Variables
+:var_запрос rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+:var_пользователь rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+:var_подписка rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+:var_кухня rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+:var_категория rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+:var_блюдо rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "Запрос валиден если пользователь имеет подписку на кухню или категорию, к которой относится блюдо" ;
+   rdfs:label "ValidFoodRequestRule" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ 
+        rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                    <http://www.w3.org/2003/11/swrl#classPredicate> :Запрос ;
+                    <http://www.w3.org/2003/11/swrl#argument1> :var_запрос ] ;
+        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                               <http://www.w3.org/2003/11/swrl#classPredicate> :Пользователь ;
+                               <http://www.w3.org/2003/11/swrl#argument1> :var_пользователь ] ;
+                   rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                              rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                          <http://www.w3.org/2003/11/swrl#classPredicate> :ТипПодписки ;
+                                          <http://www.w3.org/2003/11/swrl#argument1> :var_подписка ] ;
+                              rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                         rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                     <http://www.w3.org/2003/11/swrl#classPredicate> :Кухня ;
+                                                     <http://www.w3.org/2003/11/swrl#argument1> :var_кухня ] ;
+                                         rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                    rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                <http://www.w3.org/2003/11/swrl#classPredicate> :КатегорияБлюда ;
+                                                                <http://www.w3.org/2003/11/swrl#argument1> :var_категория ] ;
+                                                    rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                               rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                           <http://www.w3.org/2003/11/swrl#classPredicate> :Блюдо ;
+                                                                           <http://www.w3.org/2003/11/swrl#argument1> :var_блюдо ] ;
+                                                               rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                          rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                      <http://www.w3.org/2003/11/swrl#propertyPredicate> :Создан_пользователем ;
+                                                                                      <http://www.w3.org/2003/11/swrl#argument1> :var_запрос ;
+                                                                                      <http://www.w3.org/2003/11/swrl#argument2> :var_пользователь ] ;
+                                                                          rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                     rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                 <http://www.w3.org/2003/11/swrl#propertyPredicate> :Обращается_к ;
+                                                                                                 <http://www.w3.org/2003/11/swrl#argument1> :var_запрос ;
+                                                                                                 <http://www.w3.org/2003/11/swrl#argument2> :var_блюдо ] ;
+                                                                                     rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                            <http://www.w3.org/2003/11/swrl#propertyPredicate> :Имеет_подписку ;
+                                                                                                            <http://www.w3.org/2003/11/swrl#argument1> :var_пользователь ;
+                                                                                                            <http://www.w3.org/2003/11/swrl#argument2> :var_подписка ] ;
+                                                                                                rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :Включает_в_себя ;
+                                                                                                                       <http://www.w3.org/2003/11/swrl#argument1> :var_подписка ;
+                                                                                                                       <http://www.w3.org/2003/11/swrl#argument2> :var_кухня ] ;
+                                                                                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :Включает_в_себя ;
+                                                                                                                                  <http://www.w3.org/2003/11/swrl#argument1> :var_кухня ;
+                                                                                                                                  <http://www.w3.org/2003/11/swrl#argument2> :var_блюдо ] ;
+                                                                                                                      rdf:rest rdf:nil ]
+                                                                                                         ]
+                                                                                              ]
+                                                                                   ]
+                                                                        ]
+                                                             ]
+                                                  ]
+                                       ]
+                            ]
+                 ]
+   ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ 
+        rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                    <http://www.w3.org/2003/11/swrl#classPredicate> :ВалидныйЗапрос ;
+                    <http://www.w3.org/2003/11/swrl#argument1> :var_запрос ] ;
+        rdf:rest rdf:nil ]
+ ] .
