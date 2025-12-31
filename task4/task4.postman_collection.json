@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "fc8b7b94-310a-4c51-930d-7511567fbd0c",
+		"name": "Task4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50359466",
+	},
+	"item": [
+		{
+			"name": "Create Dataset",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{HOST}}/$/datasets?dbType=mem&dbName={{DATASET}}&state=active",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"$",
+						"datasets"
+					],
+					"query": [
+						{
+							"key": "dbType",
+							"value": "mem"
+						},
+						{
+							"key": "dbName",
+							"value": "{{DATASET}}"
+						},
+						{
+							"key": "state",
+							"value": "active"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Dataset",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/Users/akito/Downloads/task3_2.ttl"
+					}
+				},
+				"url": {
+					"raw": "http://{{HOST}}/{{DATASET}}/data",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"{{DATASET}}",
+						"data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Datasets List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{HOST}}/$/datasets",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"$",
+						"datasets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dateset Query",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/Users/akito/fuseki/file.rq"
+					}
+				},
+				"url": {
+					"raw": "http://{{HOST}}/{{DATASET}}/query",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"{{DATASET}}",
+						"query"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{PASSWORD}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{LOGIN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": ""
+		},
+		{
+			"key": "LOGIN",
+			"value": ""
+		},
+		{
+			"key": "PASSWORD",
+			"value": ""
+		},
+		{
+			"key": "DATASET",
+			"value": ""
+		}
+	]
+}
